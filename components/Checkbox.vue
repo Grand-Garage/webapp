@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox" :class="theme">
-    <input v-model="value" type="checkbox" />
+    <input :value="value" @change="handleChange()" type="checkbox">
     <div class="checkmark" :class="{'selected': value}">
       <svg v-if="value" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 200"><path d="M20 130l40 40L200 30" stroke-width="25" fill="none"/></svg>
     </div>
@@ -11,11 +11,11 @@
 <script>
 export default {
   props: ["value", "theme"],
-  watch: {
-    value: function(value){
-      this.$emit('input', value);
-    }
-  }
+  methods: {
+    handleChange() {
+      this.$emit('input', !this.value);
+    },
+  },
 };
 </script>
 
